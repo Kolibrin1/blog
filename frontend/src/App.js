@@ -1,87 +1,35 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext';
-import PrivateRoute from './PrivateRoute/PrivateRoute';
+import { render, screen, fireEvent } from "@testing-library/react";
+import LikeButton from "./components/Blog/LikeButton.js";
+import Login from "./components/Auth/Login.js";
 
-import Login from './components/Auth/Login';
-import Logout from './components/Auth/Logout';
-import Register from './components/Auth/Register';
+// Тест для LikeButton
+it("должен увеличивать количество лайков при клике", () => {
+  render(<LikeButton />);
 
-import Header from './components/Header/Header';
-import MainPage from './components/MainPage/MainPage';
-import Profile from './components/Profile/Profile';
-import PostPage from './components/PostPage/PostPage';
+  const button = screen.getByRole("button");
+  const initialLikes = screen.getByText(/Likes:/i);
 
-function App() {
-  const location = useLocation();
+  expect(initialLikes).toHaveTextContent("Likes: 0");
 
-  // Убираем или добавляем класс на body в зависимости от текущей страницы
-  useEffect(() => {
-    if (location.pathname === '/login' || location.pathname === '/register') {
-      document.body.classList.remove('with-header');
-    } else {
-      document.body.classList.add('with-header');
-    }
-  }, [location]);
+  fireEvent.click(button);
+  expect(screen.getByText(/Likes:/i)).toHaveTextContent("Likes: 1");
+});
 
-  return (
-    <AuthProvider>
-      <Router>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+// Тест для Login
+it("должен вызывать onSubmit при отправке формы", () => {
+  const mockSubmit = jest.fn();
+  render(<Login onSubmit={mockSubmit} />);
 
-          {/* Показываем Header только если не на страницах логина и регистрации */}
-          {location.pathname !== '/login' && location.pathname !== '/register' && <Header />}
+  const emailInput = screen.getByLabelText(/email/i);
+  const passwordInput = screen.getByLabelText(/password/i);
+  const submitButton = screen.getByRole("button", { name: /login/i });
 
-          <Route
-            path="/"
-            element={
-              <PrivateRoute>
-                <MainPage />
-              </PrivateRoute>
-            }
-          />
+  fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+  fireEvent.change(passwordInput, { target: { value: "password123" } });
+  fireEvent.click(submitButton);
 
-          <Route
-            path="/logout"
-            element={
-              <PrivateRoute>
-                <Logout />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/profile"
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/profile/:username"
-            element={
-              <PrivateRoute>
-                <Profile />
-              </PrivateRoute>
-            }
-          />
-
-          <Route
-            path="/post/:postID"
-            element={
-              <PrivateRoute>
-                <PostPage />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
-      </Router>
-    </AuthProvider>
-  );
-}
-
-export default App;
+  expect(mockSubmit).toHaveBeenCalledWith({
+    email: "test@example.com",
+    password: "password123",
+  });
+});

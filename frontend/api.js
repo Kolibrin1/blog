@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const AUTH_API_URL = '/api/auth';
 const NOTIS_API_URL = 'http://localhost:8082/api';

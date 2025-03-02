@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import '../../styles/Blog/LikeButton.css';
 import { toggleLike, fetchLikes } from '../../api/api';
 
@@ -71,7 +71,7 @@ const LikeButton = ({ postId, initialLikes = [], currentUserId, onLikeChange }) 
           {tooltipData.length > 0 ? (
             <>
               <h4>Лайкнули:</h4>
-              <ul>
+              {/* <ul>
                 {tooltipData.map((user) => (
                   <li key={user.id}>
                     <Link
@@ -82,7 +82,7 @@ const LikeButton = ({ postId, initialLikes = [], currentUserId, onLikeChange }) 
                     </Link>
                   </li>
                 ))}
-              </ul>
+              </ul> */}
             </>
           ) : (
             <p>Никто не лайкнул этот пост</p>

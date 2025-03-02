@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import LikeButton from '../../components/Blog/LikeButton';
-import Login from '../../components/Auth/Login';
+import LikeButton from '../Components/Blog/LikeButton';
+import Login from '../Components/Auth/Login';
 
 // Тест для LikeButton
 it('должен увеличивать количество лайков при клике', () => {

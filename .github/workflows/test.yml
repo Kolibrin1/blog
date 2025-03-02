@@ -15,10 +15,14 @@ jobs:
         with:
           node-version: '18' # Выбираем версию Node.js
 
+      - name: Ensure react-router-dom is installed
+        run: npm install react-router-dom
+        working-directory: frontend # Указываем папку с package.json
+
       - name: Install dependencies
         run: npm install # Устанавливаем зависимости
-        working-directory: frontend # Указываем правильную папку с package.json
+        working-directory: frontend
 
       - name: Run tests
         run: npm test # Запуск тестов
-        working-directory: frontend # Указываем правильную папку с тестами
+        working-directory: frontend

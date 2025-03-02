@@ -1,0 +1,22 @@
+name: Run React Tests
+
+on: [push, pull_request] # Запуск тестов при пуше и PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Выбираем версию Node.js
+
+      - name: Install dependencies
+        run: npm install # Устанавливаем зависимости
+
+      - name: Run tests
+        run: npm test # Запуск тестов

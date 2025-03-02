@@ -1,0 +1,89 @@
+/* Контейнер для формы поста */
+.new-post-container {
+  display: flex;
+  justify-content: center; /* Центрируем по горизонтали */
+  align-items: flex-start; /* Оставляем по вертикали на уровне строки */
+  margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+/* Карточка формы */
+.new-post-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px; /* Отступы внутри карточки */
+  width: 100%;
+  max-width: 600px;
+  box-sizing: border-box; /* Учитываем отступы внутри контейнера */
+}
+
+/* Заголовок формы */
+.new-post-card h2 {
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+/* Форма поста */
+.new-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Разрыв между элементами */
+}
+
+/* Поля ввода */
+.new-post-input,
+.new-post-textarea {
+  width: 100%; /* Растягиваем поля по ширине родителя */
+  padding: 15px; /* Внутренние отступы у поля */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #fefefe;
+  transition: border-color 0.3s;
+  box-sizing: border-box; /* Учитываем отступы внутри поля */
+}
+
+.new-post-input:focus,
+.new-post-textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Текстовое поле */
+.new-post-textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Кнопка отправки */
+.new-post-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.new-post-button:hover {
+  background-color: #0056b3;
+}
+
+/* Сообщения об ошибке и успехе */
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  text-align: center;
+}
+
+.success-message {
+  color: green;
+  font-size: 0.9em;
+  text-align: center;
+}

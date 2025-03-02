@@ -17,6 +17,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install # Устанавливаем зависимости
+        working-directory: frontend # Указываем правильную папку с package.json
 
       - name: Run tests
         run: npm test # Запуск тестов
+        working-directory: frontend # Указываем правильную папку с тестами

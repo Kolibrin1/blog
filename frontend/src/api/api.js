@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from 'axios';
 
 const AUTH_API_URL = '/api/auth';
 const NOTIS_API_URL = '/api/notifications';

@@ -20,7 +20,7 @@ jobs:
         working-directory: frontend # Указываем папку с package.json
 
       - name: Install dependencies
-        run: npm install --save-dev vitest @testing-library/react jsdom vite # Устанавливаем зависимости
+        run: npm install --save-dev vitest @testing-library/react jsdom vite @vitejs/plugin-react # Устанавливаем зависимости
         working-directory: frontend
 
       - name: Run tests

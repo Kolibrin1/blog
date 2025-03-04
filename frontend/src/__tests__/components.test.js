@@ -1,9 +1,10 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect } from 'vitest';
 import LikeButton from '../Components/Blog/LikeButton';
 import Login from '../Components/Auth/Login';
 
-// Тест для LikeButton
-it('должен увеличивать количество лайков при клике', () => {
+describe('LikeButton', () => {
+  it('должен увеличивать количество лайков при клике', () => {
     render(<LikeButton />);
     
     const button = screen.getByRole('button');
@@ -13,11 +14,12 @@ it('должен увеличивать количество лайков при
     
     fireEvent.click(button);
     expect(screen.getByText(/Likes:/i)).toHaveTextContent('Likes: 1');
+  });
 });
 
-// Тест для Login
-it('должен вызывать onSubmit при отправке формы', () => {
-    const mockSubmit = jest.fn();
+describe('Login', () => {
+  it('должен вызывать onSubmit при отправке формы', () => {
+    const mockSubmit = vi.fn(); // Vitest использует `vi.fn()` вместо `jest.fn()`
     render(<Login onSubmit={mockSubmit} />);
     
     const emailInput = screen.getByLabelText(/email/i);
@@ -29,7 +31,8 @@ it('должен вызывать onSubmit при отправке формы', 
     fireEvent.click(submitButton);
     
     expect(mockSubmit).toHaveBeenCalledWith({
-        email: 'test@example.com',
-        password: 'password123',
+      email: 'test@example.com',
+      password: 'password123',
     });
+  });
 });

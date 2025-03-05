@@ -1,4 +1,4 @@
-name: Run React Tests
+name: Run Backend Tests
 
 on: [push, pull_request] # Запуск тестов при пуше и PR
 
@@ -10,19 +10,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
         with:
-          node-version: '18' # Выбираем версию Node.js
-
-      - name: Ensure react-router-dom is installed
-        run: npm install react-router-dom
-        working-directory: frontend # Указываем папку с package.json
+          go-version: '1.21' # Версия Go
 
       - name: Install dependencies
-        run: npm install --save-dev vitest @testing-library/react jsdom vite @vitejs/plugin-react # Устанавливаем зависимости
-        working-directory: frontend
+        run: go mod tidy
+        working-directory: backend # Указываем папку с go.mod
 
       - name: Run tests
-        run: npm test # Запуск тестов
-        working-directory: frontend
+        run: go test ./...
+        working-directory: backend
